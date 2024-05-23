@@ -3,28 +3,6 @@
 #include <stdbool.h>
 #include "chess.h"
 
-#define COLUMN 8
-#define ROW 8
-
-typedef char chessPos[2];
-
-typedef struct chessPosArray
-{
-    unsigned int size;
-    chessPos* positions;
-}chessPosArray;
-
-
-chessPosArray*** validKnightMoves();
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~Healper Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-chessPosArray*** initPosArray();
-void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex);
-
-void main() {
-    validKnightMoves();
-
-}
 chessPosArray*** validKnightMoves() {
 
     chessPosArray*** posArray = initPosArray();//init the array

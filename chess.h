@@ -1,5 +1,8 @@
 #pragma once
 
+#define COLUMN 8
+#define ROW 8
+
 typedef char chessPos[2];
 
 typedef struct _chessPosArray {
@@ -18,4 +21,9 @@ typedef struct _chessPosList {
 } chessPosList;
 
 void display(chessPosList* lst);
+
 chessPosArray*** validKnightMoves();
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~Helper Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+chessPosArray*** initPosArray();
+void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex);
