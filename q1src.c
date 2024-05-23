@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "chess.h"
 
 #define COLUMN 8
 #define ROW 8
@@ -15,7 +16,6 @@ typedef struct chessPosArray
 
 
 chessPosArray*** validKnightMoves();
-
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~Healper Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 chessPosArray*** initPosArray();
