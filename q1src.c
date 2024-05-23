@@ -107,7 +107,7 @@ void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex)
     }
 
     posArray->size = count;
-
+    //
     posArray->positions = (chessPos*)realloc(posArray->positions, count * sizeof(chessPos));
     if (posArray->positions == NULL) {
         printf("Memory allocation failed\n");
