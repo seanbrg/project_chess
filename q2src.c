@@ -7,22 +7,40 @@ void display(chessPosList* lst)
 {
 	chessPosCell* node = lst->head;
 	chessPosCell* check;
-	chessPosList res;
+	chessPosList posLst;
 	bool repeat;
 
-	res.head = res.tail = NULL;
-
+	posLst.head = posLst.tail = NULL; // empty list
 	while (node != NULL)
 	{
 		check = lst->head;
 		repeat = false;
-		while (check != node) // check that its not a repeating node
-		{
-			if (check->position == node->position)
+		while (check != node) // find out if this node's position is identical
+		{					 // to a previous node (tracked by "repeat")
+			if (check->position == node->position) 
 				repeat = true;
+			check = check->next;
 		}
-		if (!repeat); // copy node to res
-	}
+		if (!repeat)   // if the node is not being repeated move it to posLst
+			insertNodeToEndList(&posLst, node);
+	}              
+	*lst = posLst;    // because we ruined original lst's order, we turn it into posLst
+	printBoard(&posLst);
+}
 
-	// print res
+void insertNodeToEndList(chessPosList* lst, chessPosCell* node)
+{
+	if (lst->head == NULL)
+		lst->head = lst->tail = node;
+	else
+	{
+		lst->tail->next = node;
+		lst->tail = node;
+	}
+	node->next = NULL;
+}
+
+void printBoard(chessPosList* lst)
+{
+
 }

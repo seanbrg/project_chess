@@ -27,3 +27,7 @@ chessPosArray*** validKnightMoves();
 /*~~~~~~~~~~~~~~~~~~~~~~~~Helper Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 chessPosArray*** initPosArray();
 void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex);
+bool isValidPosition(int row, int column);
+
+void insertNodeToEndList(chessPosList* lst, chessPosCell* node);
+void printBoard(chessPosList* lst);
