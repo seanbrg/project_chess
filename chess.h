@@ -1,7 +1,12 @@
 #pragma once
+#include <stdbool.h>
 
 #define COLUMN 8
 #define ROW 8
+
+#define CHECK_MALLOC(pointer) if (pointer == NULL) { \
+									printf("Memory allocation failed at %s\n", __FILE__); \
+									exit(EXIT_FAILURE); } \
 
 typedef char chessPos[2];
 
@@ -29,5 +34,6 @@ chessPosArray*** initPosArray();
 void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex);
 bool isValidPosition(int row, int column);
 
-void insertNodeToEndList(chessPosList* lst, chessPosCell* node);
+void removeNode(chessPosList* lst, chessPosCell* node, chessPosCell* prev);
 void printBoard(chessPosList* lst);
+int** initBoard();

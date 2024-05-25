@@ -25,36 +25,26 @@ chessPosArray*** validKnightMoves() {
 
 }
 
-chessPosArray*** initPosArray() {
 
+chessPosArray*** initPosArray() {
     int i = 0;
     int j = 0;
 
-
-    chessPosArray*** posArray = (chessPosArray***)malloc(8 * sizeof(chessPosArray**));
-    if (posArray == NULL) {
-        printf("memory allocation failed\n");
-    }
-    for (int i = 0; i < 8; ++i)
+    chessPosArray*** posArray = (chessPosArray***)malloc(ROW * sizeof(chessPosArray**));
+    CHECK_MALLOC(posArray);
+    for (int i = 0; i < ROW; ++i)
     {
-        posArray[i] = (chessPosArray**)malloc(8 * sizeof(chessPosArray*));
-        if (posArray[i] == NULL) {
-            printf("memory allocation failed\n");
-        }
-        for (int j = 0; j < 8; ++j)
+        posArray[i] = (chessPosArray**)malloc(COLUMN * sizeof(chessPosArray*));
+        CHECK_MALLOC(posArray[i]);
+        for (int j = 0; j < COLUMN; ++j)
         {
             posArray[i][j] = (chessPosArray*)malloc(sizeof(chessPosArray));
-            if (posArray[i][j] == NULL) {
-                printf("memory allocation failed\n");
-                return (EXIT_FAILURE);
-            }
+            CHECK_MALLOC(posArray[i][j]);
             posArray[i][j]->size = 0;
             posArray[i][j]->positions = NULL;
         }
     }
-
     return posArray;
-
 }
 
 bool isValidPosition(int row, int column) {

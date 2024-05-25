@@ -6,41 +6,82 @@
 void display(chessPosList* lst)
 {
 	chessPosCell* node = lst->head;
-	chessPosCell* check;
-	chessPosList posLst;
-	bool repeat;
-
-	posLst.head = posLst.tail = NULL; // empty list
+	chessPosCell* check, *prev;
 	while (node != NULL)
 	{
 		check = lst->head;
-		repeat = false;
-		while (check != node) // find out if this node's position is identical
-		{					 // to a previous node (tracked by "repeat")
-			if (check->position == node->position) 
-				repeat = true;
+		prev = NULL;
+		while (check != node) // find out if this node's position is
+		{					 // identical to a previous node - "check"
+			if (check->position == node->position)
+				removeNode(lst, check, prev);
+			prev = check;
 			check = check->next;
 		}
-		if (!repeat)   // if the node is not being repeated move it to posLst
-			insertNodeToEndList(&posLst, node);
-	}              
-	*lst = posLst;    // because we ruined original lst's order, we turn it into posLst
-	printBoard(&posLst);
+	}
+	printBoard(lst);
 }
 
-void insertNodeToEndList(chessPosList* lst, chessPosCell* node)
+void removeNode(chessPosList* lst, chessPosCell* node, chessPosCell* prev)
 {
-	if (lst->head == NULL)
-		lst->head = lst->tail = node;
-	else
-	{
-		lst->tail->next = node;
-		lst->tail = node;
-	}
-	node->next = NULL;
+	if (lst->tail == node)
+		lst->tail = prev; // prev will be NULL if node is also head
+
+	if (lst->head == node)
+		lst->head = node->next;
+	else prev->next = node->next;
+
+	free(node);
 }
 
 void printBoard(chessPosList* lst)
 {
+    int** board = initBoard();
+    int i = 1, j, x, y;
+	chessPosCell* posNode = lst->head;
 
+	while (posNode != NULL) // fill up the board array by the order of lst
+	{
+		y = posNode->position[0] - 'A';
+		x = posNode->position[1] - '0';
+		board[y][x] = i;
+		i++;
+		posNode = posNode->next;
+	}
+	
+	putchar(' ');
+	for (i = 1; i <= COLUMN; ++i)
+	{
+		printf("%3d", i);
+	}
+	putchar('\n');
+	for (i = 0; i < ROW; ++i)
+	{
+		printf("%c|", 'A' + i);
+		for (j = 0; j < COLUMN; ++j)
+		{
+			if (board[i][j] != 0) printf("%.2d|", board[i][j]);
+			else printf("  |");
+		}
+		putchar('\n');
+	}
+}
+
+
+int** initBoard() {
+    int i = 0;
+    int j = 0;
+
+	int** board = (int***)malloc(ROW * sizeof(int*));
+    CHECK_MALLOC(board);
+    for (int i = 0; i < ROW; ++i)
+    {
+        board[i] = (int*)malloc(COLUMN * sizeof(int));
+		CHECK_MALLOC(board[i]);
+        for (int j = 0; j < COLUMN; ++j)
+        {
+			board[i][j] = 0;
+        }
+    }
+    return board;
 }
