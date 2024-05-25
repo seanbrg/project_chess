@@ -1,11 +1,12 @@
 #pragma once
 #include <stdbool.h>
+#include <stdlib.h>
 
 #define COLUMN 8
 #define ROW 8
 
 #define CHECK_MALLOC(pointer) if (pointer == NULL) { \
-									printf("Memory allocation failed at %s\n", __FILE__); \
+									printf("Memory allocation failed at function %s in %s", __func__, __FILE__); \
 									exit(EXIT_FAILURE); } \
 
 typedef char chessPos[2];
