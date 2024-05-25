@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __CHESS_H
+#define __CHESS_H
+
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -38,3 +40,5 @@ bool isValidPosition(int row, int column);
 void removeNode(chessPosList* lst, chessPosCell* node, chessPosCell* prev);
 void printBoard(chessPosList* lst);
 int** initBoard();
+
+#endif
