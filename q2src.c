@@ -36,7 +36,7 @@ void removeNode(chessPosList* lst, chessPosCell* node, chessPosCell* prev)
 
 void printBoard(chessPosList* lst)
 {
-    int** board = initBoard();
+    int** board = initBoard(lst);
     int i = 1, j, x, y;
 	chessPosCell* posNode = lst->head;
 
@@ -65,10 +65,15 @@ void printBoard(chessPosList* lst)
 		}
 		putchar('\n');
 	}
+
+	for (i = 0; i < ROW; ++i)
+		free(board[i]);
+	free(board);
 }
 
 
-int** initBoard() {
+int** initBoard() 
+{
     int i = 0;
     int j = 0;
 
