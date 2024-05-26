@@ -18,11 +18,6 @@ chessPosArray*** validKnightMoves() {
     }
 
 
-    //calculate valid positions for each square
-
-    //add to the chessPos *positions and update size;
-
-
 }
 
 
