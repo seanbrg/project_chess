@@ -28,14 +28,33 @@ typedef struct _chessPosList {
 	chessPosCell* tail;
 } chessPosList;
 
+typedef struct _treeNodeList {
+	struct _treeNodeListCell* head;
+	struct _treeNodeListCell* tail;
+} treeNodeList;
+
+typedef struct _treeNode {
+	chessPos position;
+	treeNodeList next_possible_positions;
+} treeNode;
+
+typedef struct _treeNodeListCell {
+	treeNode* node;
+	struct _treeNodeListCell* next;
+} treeNodeListCell;
+
+typedef struct _pathTree {
+	treeNode* root;
+} pathTree;
+
+pathTree findAllPossibleKnightPaths(chessPos* startingPosition);
+
+
 void display(chessPosList* lst);
 
 chessPosArray*** validKnightMoves();
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~Helper Functions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-chessPosArray*** initPosArray();
-void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex);
-bool isValidPosition(int row, int column);
+void freePosArray(chessPosArray*** posArray);
 
 void removeNode(chessPosList* lst, chessPosCell* node, chessPosCell* prev);
 void printBoard(chessPosList* lst);

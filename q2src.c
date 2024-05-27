@@ -1,16 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
 #include "chess.h"
 
 void display(chessPosList* lst)
 {
 	chessPosCell* node = lst->head;
 	chessPosCell* check, *prev;
+
 	while (node != NULL)
 	{
 		check = lst->head;
 		prev = NULL;
+
 		while (check != node) // find out if this node's position is
 		{					 // identical to a previous node - "check"
 			if (check->position == node->position)
@@ -43,7 +46,7 @@ void printBoard(chessPosList* lst)
 	while (posNode != NULL) // fill up the board array by the order of lst
 	{
 		y = posNode->position[0] - 'A';
-		x = posNode->position[1] - '0';
+		x = posNode->position[1] - '1';
 		board[y][x] = i;
 		i++;
 		posNode = posNode->next;
