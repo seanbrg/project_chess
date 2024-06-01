@@ -121,6 +121,7 @@ void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex)
         exit(EXIT_FAILURE);
     }
 }
+
 //delete
 void freePosArray(chessPosArray*** posArray) {
     for (int i = 0; i < ROW; ++i) {

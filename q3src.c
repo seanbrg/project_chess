@@ -4,23 +4,37 @@
 
 #include "chess.h"
 
-pathTree findAllPossibleKnightPaths(chessPos* startingPosition) {
+chessPosArray*** movesTable;
 
+pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
+{
 	pathTree tree;
-	chessPosArray*** validKnightMovesArr = validKnightMoves();
+	chessPosList ancestors;
+	
+	makeEmptyPosList(&ancestors);
 
-	tree.root = findAllPossibleKnightPathsHelper(startingPosition,tree.root, validKnightMovesArr);
-
-	freePosArray(validKnightMovesArr);
-
+	movesTable = validKnightMoves();
+	tree.root = createTreeNode(startingPosition);
+	tree.root = findAllPossibleKnightPathsHelper(tree.root, &tree, &ancestors);
+	freePosArray(movesTable);
 }
 
-treeNode* findAllPossibleKnightPathsHelper(chessPos* startingPosition,treeNode* node,const chessPosArray*** posArray) {
-	int rowIndex = startingPosition[0] - 'A';
-	int columnIndex = startingPosition[1] - '1';
+treeNode* findAllPossibleKnightPathsHelper(treeNode* root, chessPosList* ancestors)
+{
+	int row = root->position[0] - 'A';
+	int column = root->position[1] - '1';
 
-	treeNode* root = createTreeNode(*startingPosition);
+	chessPos currentPos = { row , column };
+	insertPosDataToStart(ancestors, currentPos);
+	
+	makeEmptyRootList(&(root->next_possible_positions));
 
+	// iterate over movesTable[row][column] - every position that doesnt appear in ancestors
+	// becomes a new child in root->next possible positions
+
+	// then call recursion for every child in root->next possible positions
+
+	removePosCellFromStart(ancestors);
 }
 
 treeNode* createTreeNode(chessPos position) {
@@ -34,16 +48,4 @@ treeNode* createTreeNode(chessPos position) {
 	newNode->next_possible_positions.tail = NULL;
 
 	return newNode;
-}
-
-void freePosArray(chessPosArray*** posArray) {
-	for (int i = 0; i < ROW; ++i) {
-		for (int j = 0; j < COLUMN; ++j) {
-
-			free(posArray[i][j]->positions);
-			free(posArray[i][j]);
-		}
-		free(posArray[i]);
-	}
-	free(posArray);
 }

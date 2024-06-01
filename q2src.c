@@ -1,40 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
 #include "chess.h"
 
 void display(chessPosList* lst)
 {
 	chessPosCell* node = lst->head;
 	chessPosCell* check, *prev;
-
 	while (node != NULL)
 	{
 		check = lst->head;
 		prev = NULL;
-
 		while (check != node) // find out if this node's position is
 		{					 // identical to a previous node - "check"
 			if (check->position == node->position)
-				removeNode(lst, check, prev);
+				removePosCellFromEnd(lst, check, prev);
 			prev = check;
 			check = check->next;
 		}
 	}
 	printBoard(lst);
-}
-
-void removeNode(chessPosList* lst, chessPosCell* node, chessPosCell* prev)
-{
-	if (lst->tail == node)
-		lst->tail = prev; // prev will be NULL if node is also head
-
-	if (lst->head == node)
-		lst->head = node->next;
-	else prev->next = node->next;
-
-	free(node);
 }
 
 void printBoard(chessPosList* lst)
