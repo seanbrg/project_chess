@@ -4,37 +4,52 @@
 
 #include "chess.h"
 
-chessPosArray*** movesTable;
-
 pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 {
 	pathTree tree;
-	chessPosList ancestors;
-	
-	makeEmptyPosList(&ancestors);
+	int** takenTable = initBoard();
+	chessPosArray*** movesTable = validKnightMoves();
 
-	movesTable = validKnightMoves();
 	tree.root = createTreeNode(startingPosition);
-	tree.root = findAllPossibleKnightPathsHelper(tree.root, &tree, &ancestors);
+	tree.root = findAllPossibleKnightPathsHelper(tree.root, takenTable, movesTable);
 	freePosArray(movesTable);
 }
 
-treeNode* findAllPossibleKnightPathsHelper(treeNode* root, chessPosList* ancestors)
+treeNode* findAllPossibleKnightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable)
 {
+	int i;
 	int row = root->position[0] - 'A';
 	int column = root->position[1] - '1';
+	int nextRow, nextColumn;
+	takenTable[row][column] = 1;
 
-	chessPos currentPos = { row , column };
-	insertPosDataToStart(ancestors, currentPos);
-	
+	treeNode* nextNode;
+	treeNodeListCell* nextNodeCell;
+	chessPos* nextPosition = movesTable[row][column]->positions;
+	int nextPosSize = movesTable[row][column]->size;
+
 	makeEmptyRootList(&(root->next_possible_positions));
 
-	// iterate over movesTable[row][column] - every position that doesnt appear in ancestors
-	// becomes a new child in root->next possible positions
+	for (i = 0; i < nextPosSize; ++i)
+	{
+		nextRow = (nextPosition + i)[0] - 'A';
+		nextColumn = (nextPosition + i)[1] - '1';
 
-	// then call recursion for every child in root->next possible positions
+		if (takenTable[nextRow][nextColumn] == 0)
+		{
+			nextNode = createTreeNode(nextPosition + i);
+			insertRootDataToEnd(&(root->next_possible_positions), nextNode);
+		}
+	}
 
-	removePosCellFromStart(ancestors);
+	nextNodeCell = root->next_possible_positions.head;
+	while (nextNodeCell != NULL)
+	{
+		findAllPossibleKnightPathsHelper(nextNodeCell->node, takenTable, movesTable);
+		nextNodeCell = nextNodeCell->next;
+	}
+
+	takenTable[row][column] = 0;
 }
 
 treeNode* createTreeNode(chessPos position) {

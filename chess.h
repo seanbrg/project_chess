@@ -56,7 +56,7 @@ typedef struct _treeNodeListCell {
 
 pathTree findAllPossibleKnightPaths(chessPos* startingPosition);
 
-treeNode* findAllPossibleKnightPathsHelper(treeNode* root, chessPosList* ancestors);
+treeNode* findAllPossibleKnightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable);
 
 void display(chessPosList* lst);
 
@@ -64,6 +64,7 @@ chessPosArray*** validKnightMoves();
 
 void freePosArray(chessPosArray*** posArray);
 
+treeNode* createTreeNode(chessPos position);
 bool isValidPosition(int row, int column);
 void printBoard(chessPosList* lst);
 int** initBoard();
