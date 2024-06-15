@@ -7,6 +7,8 @@ int posRow(chessPos pos);
 
 int posCol(chessPos pos);
 
+bool comparePos(chessPos A, chessPos B);
+
 void makeEmptyRootList(treeNodeList* lst);
 
 treeNode* createTreeNode(chessPos position);
@@ -25,9 +27,9 @@ bool isValidPosition(int row, int column);
 
 void makeEmptyPosList(chessPosList* lst);
 
-void removePosCellFromEnd(chessPosList* lst, chessPosCell* node, chessPosCell* prev);
+void removePosCell(chessPosList* lst, chessPosCell* node, chessPosCell* prev);
 
-void removePosCellFromStart(chessPosList* lst);
+void removePosCellHead(chessPosList* lst);
 
 chessPosCell* createNewPosCell(chessPos data, chessPosCell* next);
 

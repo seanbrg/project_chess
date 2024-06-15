@@ -5,19 +5,27 @@
 void display(chessPosList* lst) 
 {
 	chessPosCell* node = lst->head;
-	chessPosCell* check, *prev;
+	chessPosCell* check, * prev = NULL;
 
 	while (node != NULL) // iterate over all the nodes in lst
 	{
+		printf("%c %c", node->position[0], node->position[1]);
 		check = lst->head;
-		prev = NULL;
 		while (check != node) // find out if this node's position is
 		{					 // identical to a previous node - "check"
-			if (check->position == node->position)
-				removePosCellFromEnd(lst, check, prev);
+			if (comparePos(check->position, node->position))
+			{
+				printf("removed!");
+				removePosCell(lst, node, prev);
+				node = prev;
+				break;
+			}
 			prev = check;
 			check = check->next;
 		}
+		prev = node;
+		node = node->next;
+		putchar('\n');
 	}
 	printBoard(lst);
 }
@@ -40,15 +48,15 @@ void printBoard(chessPosList* lst)
 	}
 	
 	putchar(' ');			// print this whole shebang
-	for (i = 1; i <= COLUMN; ++i)
+	for (i = 1; i <= COLS; ++i)
 	{
 		printf("%3d", i);        // top row
 	}
 	putchar('\n');
-	for (i = 0; i < ROW; ++i)
+	for (i = 0; i < ROWS; ++i)
 	{
 		printf("%c|", 'A' + i);  // left column
-		for (j = 0; j < COLUMN; ++j)
+		for (j = 0; j < COLS; ++j)
 		{   // number in a cell
 			if (board[i][j] != 0) printf("%.2d|", board[i][j]);
 			else printf("  |");
@@ -56,7 +64,7 @@ void printBoard(chessPosList* lst)
 		putchar('\n');
 	}
 
-	for (i = 0; i < ROW; ++i)
+	for (i = 0; i < ROWS; ++i)
 		free(board[i]);
 	free(board);
 }
@@ -68,13 +76,13 @@ int** initBoard()
     int i = 0;
     int j = 0;
 
-	int** board = (int***)malloc(ROW * sizeof(int*));
+	int** board = (int***)malloc(ROWS * sizeof(int*));
     CHECK_MALLOC(board);
-    for (int i = 0; i < ROW; ++i)
+    for (int i = 0; i < ROWS; ++i)
     {
-        board[i] = (int*)malloc(COLUMN * sizeof(int));
+        board[i] = (int*)malloc(COLS * sizeof(int));
 		CHECK_MALLOC(board[i]);
-        for (int j = 0; j < COLUMN; ++j)
+        for (int j = 0; j < COLS; ++j)
         {
 			board[i][j] = 0;
         }

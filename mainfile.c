@@ -2,23 +2,24 @@
 
 void main()
 {
-	//test for q1 func
+	//test for q2
 
-    chessPosArray*** validKnightMovesArr = validKnightMoves();
+	chessPosArray*** movesTable = validKnightMoves();
 
-    for (int i = 0; i < ROW; i++) {
-        for (int j = 0; j < COLUMN; j++) {
-            printf("The square: (%c,%d)\n",'A' + i, j + 1);
+	chessPosList lst;
+	makeEmptyPosList(&lst);
 
-            chessPosArray* posArray = validKnightMovesArr[i][j];
+	
+	for (int k = 0; k < movesTable[3][5]->size; ++k)
+	{
+		insertPosDataToStart(&lst, movesTable[3][5]->positions[k]);
+	}
+	
 
-            for (int k = 0; k < posArray->size; k++) {
+	for (int k = 0; k < movesTable[3][1]->size; ++k)
+	{
+		insertPosDataToStart(&lst, movesTable[3][1]->positions[k]);
+	}
 
-                printf("(%c,%c)\t", posArray->positions[k][0], posArray->positions[k][1]);
-            }
-            printf("\n\n");
-        }
-    }
-
-    freePosArray(validKnightMovesArr);
+	display(&lst);
 }

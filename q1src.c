@@ -6,8 +6,8 @@ chessPosArray*** validKnightMoves() {
 
     chessPosArray*** posArray = initPosArray(); //initialize the array
 
-    for (int i = 0; i < ROW; i++) {
-        for (int j = 0; j < COLUMN; j++) {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
 
             calculateValidMoves(posArray[i][j], i, j);
         }
@@ -22,16 +22,16 @@ chessPosArray*** initPosArray() {
     int j = 0;
 
     //allocate memory for the first dimension of the 3D array (rows)
-    chessPosArray*** posArray = (chessPosArray***)malloc(ROW * sizeof(chessPosArray**));
+    chessPosArray*** posArray = (chessPosArray***)malloc(ROWS * sizeof(chessPosArray**));
     CHECK_MALLOC(posArray);
 
-    for (int i = 0; i < ROW; ++i)
+    for (int i = 0; i < ROWS; ++i)
     {
         //allocate memory for the second dimension of the 3D array (columns)
-        posArray[i] = (chessPosArray**)malloc(COLUMN * sizeof(chessPosArray*));
+        posArray[i] = (chessPosArray**)malloc(COLS * sizeof(chessPosArray*));
         CHECK_MALLOC(posArray[i]);
 
-        for (int j = 0; j < COLUMN; ++j)
+        for (int j = 0; j < COLS; ++j)
         {
             //allocate memory for the third dimension (chessPosArray structs)
             posArray[i][j] = (chessPosArray*)malloc(sizeof(chessPosArray));
@@ -85,8 +85,8 @@ void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex)
 
 // free the array
 void freePosArray(chessPosArray*** posArray) {
-    for (int i = 0; i < ROW; ++i) {
-        for (int j = 0; j < COLUMN; ++j) {
+    for (int i = 0; i < ROWS; ++i) {
+        for (int j = 0; j < COLS; ++j) {
 
             free(posArray[i][j]->positions);
             free(posArray[i][j]);

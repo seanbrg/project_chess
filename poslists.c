@@ -10,6 +10,11 @@ int posCol(chessPos pos)
 	return pos[1] - '1';
 }
 
+bool comparePos(chessPos A, chessPos B)
+{
+	return (A[0] == B[0] && A[1] == B[1]);
+}
+
 void makeEmptyPosList(chessPosList* lst)
 {
 	lst->head = lst->tail = NULL;
@@ -20,7 +25,7 @@ bool isEmptyPosList(chessPosList* lst)
 	return (lst->head == NULL) ? true : false;
 }
 
-void removePosCellFromEnd(chessPosList* lst, chessPosCell* node, chessPosCell* prev)
+void removePosCell(chessPosList* lst, chessPosCell* node, chessPosCell* prev)
 {
 	if (lst->tail == node)
 		lst->tail = prev; // prev will be NULL if node is also head
@@ -32,7 +37,7 @@ void removePosCellFromEnd(chessPosList* lst, chessPosCell* node, chessPosCell* p
 	free(node);
 }
 
-void removePosCellFromStart(chessPosList* lst)
+void removePosCellHead(chessPosList* lst)
 {
 	if (!isEmptyPosList(lst))
 	{
