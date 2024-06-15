@@ -1,4 +1,6 @@
 #include "utilities.h"
+#include "question1.h"
+#include "listhelpers.h"
 
 chessPosArray*** validKnightMoves() {
 
@@ -77,7 +79,7 @@ void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex)
     posArray->positions = temp;
 }
 
-//delete
+
 void freePosArray(chessPosArray*** posArray) {
     for (int i = 0; i < ROW; ++i) {
         for (int j = 0; j < COLUMN; ++j) {

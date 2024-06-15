@@ -1,4 +1,6 @@
 #include "utilities.h"
+#include "question2.h"
+#include "listhelpers.h"
 
 void display(chessPosList* lst)
 {

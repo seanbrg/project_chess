@@ -1,4 +1,6 @@
 #include "utilities.h"
+#include "question3.h"
+#include "listhelpers.h"
 
 pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 {
@@ -12,6 +14,7 @@ pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 	return tree;
 	freePosArray(movesTable);
 }
+
 
 void findAllPossibleKnightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable)
 {
@@ -27,7 +30,6 @@ void findAllPossibleKnightPathsHelper(treeNode* root, int** takenTable, chessPos
 	int nextPosSize = movesTable[row][column]->size;
 
 	makeEmptyRootList(&(root->next_possible_positions));
-
 	for (i = 0; i < nextPosSize; ++i)
 	{
 		nextRow = (nextPosition + i)[0] - 'A';
@@ -46,9 +48,9 @@ void findAllPossibleKnightPathsHelper(treeNode* root, int** takenTable, chessPos
 		findAllPossibleKnightPathsHelper(nextNodeCell->node, takenTable, movesTable);
 		nextNodeCell = nextNodeCell->next;
 	}
-
 	takenTable[row][column] = 0;
 }
+
 
 treeNode* createTreeNode(chessPos position) {
 	treeNode* newNode = (treeNode*)malloc(sizeof(treeNode));
