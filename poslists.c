@@ -1,4 +1,4 @@
-#include "chess.h"
+#include "utilities.h"
 
 void makeEmptyPosList(chessPosList* lst)
 {

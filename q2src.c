@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "chess.h"
+#include "utilities.h"
 
 void display(chessPosList* lst)
 {
@@ -21,6 +18,7 @@ void display(chessPosList* lst)
 	}
 	printBoard(lst);
 }
+
 
 void printBoard(chessPosList* lst)
 {

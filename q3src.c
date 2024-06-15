@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-#include "chess.h"
+#include "utilities.h"
 
 pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 {
@@ -11,11 +7,13 @@ pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 	chessPosArray*** movesTable = validKnightMoves();
 
 	tree.root = createTreeNode(startingPosition);
-	tree.root = findAllPossibleKnightPathsHelper(tree.root, takenTable, movesTable);
+	findAllPossibleKnightPathsHelper(tree.root, takenTable, movesTable);
+
+	return tree;
 	freePosArray(movesTable);
 }
 
-treeNode* findAllPossibleKnightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable)
+void findAllPossibleKnightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable)
 {
 	int i;
 	int row = root->position[0] - 'A';

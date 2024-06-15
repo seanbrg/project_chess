@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "chess.h"
+#include "utilities.h"
 
 void main()
 {

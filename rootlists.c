@@ -1,9 +1,10 @@
-#include "chess.h"
+#include "utilities.h"
 
-void makeEmptyRootList(treeNodeList* lst)
+void makeEmptyRootList(treeNodeList* rootList)
 {
-	lst->head = lst->tail = NULL;
+	rootList->head = rootList->tail = NULL;
 }
+
 
 bool isEmptyRootList(treeNodeList* lst)
 {
