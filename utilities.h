@@ -13,6 +13,38 @@
 									printf("Memory allocation failed at function %s in %s", __func__, __FILE__); \
 									exit(EXIT_FAILURE); } \
 
+
+
+/*
+                                                                                   .--.
+                                                                                   `.  \
+                                                                                     \  \
+                                                                                      .  \
+                                                                                      :   .
+                                                                                      |    .
+                                                                                      |    :
+                                                                                      |    |
+                                      ..._  ___                                       |    |
+                                     `."".`''''""--..___                              |    |
+                                     ,-\  \             ""-...__         _____________/    |
+                                     / ` " '                    `""""""""                  .
+                                     \                                                      L
+                                     (>                                                      \
+                                    /                                                         \
+                                    \_    ___..---.                                            L
+                                      `--'         '.                                           \
+                                                     .                                           \_
+                                                    _/`.                                           `.._
+                                                 .'     -.                                             `.
+                                                /     __.-Y     /''''''-...___,...--------.._            |
+   ,-"""-.                                     /   _."    |    /                ' .      \   '---..._    |
+  /\     /\                                   /   /      /    /                _,. '    ,/           |   |
+ |  |   |  |                                  \_,'     _.'   /              /''     _,-'            _|   |
+  \/     \/                                           '     /               `-----''               /     |
+   '-...-'                                            `...-'                                       `...-'                       
+*/
+
+
 // position
 typedef char chessPos[2];
 
@@ -24,32 +56,36 @@ typedef struct _chessPosArray {
 } chessPosArray;
 
 
-// list of positions
+// cell in a list of positions
 typedef struct _chessPosCell {
 	chessPos position;
 	struct _chessPosCell* next;
 } chessPosCell;
 
+// list of positions
 typedef struct _chessPosList {
 	chessPosCell* head;
 	chessPosCell* tail;
 } chessPosList;
 
-// tree of positions - the children are saved in lists of tree nodes
+// list of tree nodes
 typedef struct _treeNodeList {
 	struct _treeNodeListCell* head;
 	struct _treeNodeListCell* tail;
 } treeNodeList;
 
+// tree node (has a list of tree nodes as its children)
 typedef struct _treeNode {
 	chessPos position;
 	treeNodeList next_possible_positions;
 } treeNode;
 
+// tree
 typedef struct _pathTree {
 	treeNode* root;
 } pathTree;
 
+// cell in a list of tree nodes
 typedef struct _treeNodeListCell {
 	treeNode* node;
 	struct _treeNodeListCell* next;

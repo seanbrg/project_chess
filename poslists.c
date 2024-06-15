@@ -1,5 +1,15 @@
 #include "utilities.h"
 
+int posRow(chessPos pos)
+{
+	return pos[0] - 'A';
+}
+
+int posCol(chessPos pos)
+{
+	return pos[1] - '1';
+}
+
 void makeEmptyPosList(chessPosList* lst)
 {
 	lst->head = lst->tail = NULL;

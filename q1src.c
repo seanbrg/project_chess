@@ -1,5 +1,7 @@
 #include "utilities.h"
 
+
+// calculate all valid knight moves for each position on a chessboard
 chessPosArray*** validKnightMoves() {
 
     chessPosArray*** posArray = initPosArray(); //initialize the array
@@ -14,6 +16,7 @@ chessPosArray*** validKnightMoves() {
 }
 
 
+// initialize an empty array of chessPos
 chessPosArray*** initPosArray() {
     int i = 0;
     int j = 0;
@@ -42,11 +45,13 @@ chessPosArray*** initPosArray() {
 }
 
 
+// check if a given position is in the board
 bool isValidPosition(int row, int column) {
     return (row >= 0 && row < 8) && (column >= 0 && column < 8);
 }
 
 
+// calculate all valid knight moves from a given position and save in posArray
 void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex) {
     //all possible moves for a knight from any given position
     int moves[8][2] = { {1, -2}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}, {-1, -2} };
@@ -78,6 +83,7 @@ void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex)
 }
 
 
+// free the array
 void freePosArray(chessPosArray*** posArray) {
     for (int i = 0; i < ROW; ++i) {
         for (int j = 0; j < COLUMN; ++j) {

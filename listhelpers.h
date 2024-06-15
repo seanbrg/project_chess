@@ -3,7 +3,13 @@
 
 #include "utilities.h"
 
+int posRow(chessPos pos);
+
+int posCol(chessPos pos);
+
 void makeEmptyRootList(treeNodeList* lst);
+
+treeNode* createTreeNode(chessPos position);
 
 treeNodeListCell* createNewRootCell(treeNode* data, treeNodeListCell* next);
 

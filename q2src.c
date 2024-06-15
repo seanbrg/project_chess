@@ -1,10 +1,13 @@
 #include "utilities.h"
 
-void display(chessPosList* lst)
+
+// remove duplicates from a chessPos list and print as a board
+void display(chessPosList* lst) 
 {
 	chessPosCell* node = lst->head;
 	chessPosCell* check, *prev;
-	while (node != NULL)
+
+	while (node != NULL) // iterate over all the nodes in lst
 	{
 		check = lst->head;
 		prev = NULL;
@@ -20,32 +23,33 @@ void display(chessPosList* lst)
 }
 
 
+// print a board marked by lst
 void printBoard(chessPosList* lst)
 {
     int** board = initBoard(lst);
     int i = 1, j, x, y;
 	chessPosCell* posNode = lst->head;
 
-	while (posNode != NULL) // fill up the board array by the order of lst
+	while (posNode != NULL) // fill up the 2D board array
 	{
-		y = posNode->position[0] - 'A';
-		x = posNode->position[1] - '1';
+		y = posRow(posNode->position);
+		x = posCol(posNode->position);
 		board[y][x] = i;
 		i++;
 		posNode = posNode->next;
 	}
 	
-	putchar(' ');
+	putchar(' ');			// print this whole shebang
 	for (i = 1; i <= COLUMN; ++i)
 	{
-		printf("%3d", i);
+		printf("%3d", i);        // top row
 	}
 	putchar('\n');
 	for (i = 0; i < ROW; ++i)
 	{
-		printf("%c|", 'A' + i);
+		printf("%c|", 'A' + i);  // left column
 		for (j = 0; j < COLUMN; ++j)
-		{
+		{   // number in a cell
 			if (board[i][j] != 0) printf("%.2d|", board[i][j]);
 			else printf("  |");
 		}
@@ -58,6 +62,7 @@ void printBoard(chessPosList* lst)
 }
 
 
+// initialize an empty board of ints
 int** initBoard() 
 {
     int i = 0;

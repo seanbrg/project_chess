@@ -5,8 +5,6 @@
 
 pathTree findAllPossibleKnightPaths(chessPos* startingPosition);
 
-void findAllPossibleKnightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable);
-
-treeNode* createTreeNode(chessPos position);
+void knightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable);
 
 #endif
