@@ -1,7 +1,7 @@
 #include "utilities.h"
 
 
-// make a tree for all possible knight paths across the board
+// make a tree for all possible knight paths across the board from startingPosition
 pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 {
 	pathTree tree;

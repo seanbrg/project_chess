@@ -3,8 +3,6 @@
 
 #include "utilities.h"
 
-pathTree findAllPossibleKnightPaths(chessPos* startingPosition);
 
-void knightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable);
 
 #endif
