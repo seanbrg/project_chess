@@ -21,7 +21,4 @@ void main()
     }
 
     freePosArray(validKnightMovesArr);
-
-
-	
 }

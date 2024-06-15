@@ -1,6 +1,4 @@
 #include "utilities.h"
-#include "question3.h"
-#include "listhelpers.h"
 
 pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 {

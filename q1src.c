@@ -1,6 +1,4 @@
 #include "utilities.h"
-#include "question1.h"
-#include "listhelpers.h"
 
 chessPosArray*** validKnightMoves() {
 
