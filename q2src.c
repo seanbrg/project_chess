@@ -76,12 +76,8 @@ int** initBoard()
     CHECK_MALLOC(board);
     for (int i = 0; i < ROWS; ++i)
     {
-        board[i] = (int*)malloc(COLS * sizeof(int));
+        board[i] = (int*)calloc(COLS, sizeof(int));
 		CHECK_MALLOC(board[i]);
-        for (int j = 0; j < COLS; ++j)
-        {
-			board[i][j] = 0;
-        }
     }
     return board;
 }

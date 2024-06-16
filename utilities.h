@@ -5,8 +5,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define ROWS 8
-#define COLS 8
+
+#define ROWS 3
+#define COLS 3
 #define KNIGHT_MOVES 8
 
 #define CHECK_MALLOC(pointer) if (pointer == NULL) { \

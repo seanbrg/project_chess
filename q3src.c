@@ -1,5 +1,6 @@
 #include "utilities.h"
 
+int counter = 0;
 
 // make a tree for all possible knight paths across the board from startingPosition
 pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
@@ -9,8 +10,8 @@ pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 	// board of all valid moves from each point, from q1
 	chessPosArray*** movesTable = validKnightMoves(); 
 										
-	tree.root = createTreeNode(startingPosition);
-	knightPathsHelper(tree.root, takenTable, movesTable);
+	tree.root = createTreeNode(*startingPosition);
+	knightPathsHelper(tree.root, takenTable, movesTable, counter);
 
 	freePosArray(movesTable);
 	return tree;
@@ -24,29 +25,22 @@ void knightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesT
 	int curRow = posRow(root->position);
 	int curCol = posCol(root->position);
 	takenTable[curRow][curCol] = 1; // mark current position as taken
-
 	// check possible moves from current position
-	chessPos* nextPosition = movesTable[curRow][curCol]->positions;
+	chessPos* nextPositions = movesTable[curRow][curCol]->positions;
 	int nextPosSize = movesTable[curRow][curCol]->size;
 
 	makeEmptyRootList(&(root->next_possible_positions));
 	for (i = 0; i < nextPosSize; ++i) // iterate on the possible moves
 	{
-		int nextRow = posRow(nextPosition + i);
-		int nextCol = posCol(nextPosition + i);
+		int nextRow = posRow(nextPositions[i]);
+		int nextCol = posCol(nextPositions[i]);
 		// make a new tree node if the next move's position is not taken
 		if (takenTable[nextRow][nextCol] == 0)
 		{
-			treeNode* nextNode = createTreeNode(nextPosition + i);
+			treeNode* nextNode = createTreeNode(nextPositions[i]);
 			insertRootDataToEnd(&(root->next_possible_positions), nextNode);
+			knightPathsHelper(root->next_possible_positions.tail->node, takenTable, movesTable, counter);
 		}
-	}
-	// call recursion upon every tree node that was previously created
-	treeNodeListCell* nextNodeCell = root->next_possible_positions.head;
-	while (nextNodeCell != NULL)
-	{
-		knightPathsHelper(nextNodeCell->node, takenTable, movesTable);
-		nextNodeCell = nextNodeCell->next;
 	}
 	takenTable[curRow][curCol] = 0; // mark current position as untaken (for other paths)
 }

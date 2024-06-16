@@ -47,7 +47,7 @@ chessPosArray*** initPosArray() {
 
 // check if a given position is in the board
 bool isValidPosition(int row, int column) {
-    return (row >= 0 && row < 8) && (column >= 0 && column < 8);
+    return (row >= 0 && row < ROWS) && (column >= 0 && column < COLS);
 }
 
 
@@ -75,11 +75,14 @@ void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex)
         }
     }
     posArray->size = count;
-
     //reallocate memory to fit the actual number of valid moves
-    chessPos* temp = (chessPos*)realloc(posArray->positions, count * sizeof(chessPos));
-    CHECK_MALLOC(temp);
-    posArray->positions = temp;
+    if (count != 0)
+    {
+        chessPos* temp = (chessPos*)realloc(posArray->positions, count * sizeof(chessPos));
+        CHECK_MALLOC(temp);
+        posArray->positions = temp;
+    }
+    else posArray->positions = NULL;
 }
 
 
