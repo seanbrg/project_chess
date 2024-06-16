@@ -3,7 +3,7 @@
 
 void main()
 {
-	
+	/*
 	// test for q1	
 	chessPosArray*** movesTable = validKnightMoves();
 
@@ -19,7 +19,7 @@ void main()
 			}
 			putchar('\n');
 		}
-	}
+	}*/
 
 	/*
 	// test for q2
@@ -44,5 +44,24 @@ void main()
 	printf("COUNTER: %d", counter);
 	*/
 
+	//test for q4
+	
+	chessPos pos = { 'A', '1' };
 
+	pathTree tree = findAllPossibleKnightPaths(&pos);
+
+	chessPosList* lst = findKnightPathCoveringAllBoard(&tree);
+	if (lst == NULL) exit(0);
+	chessPosCell* node = lst->head;
+
+	int counter = 0;
+	while (node != NULL)
+	{
+		printf("(%c %c) ", node->position[0], node->position[1]);
+		node = node->next;
+		counter++;
+	}
+	printf("\n%d\n\n", counter);
+
+	display(lst);
 }

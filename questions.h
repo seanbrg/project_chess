@@ -102,14 +102,22 @@ pathTree findAllPossibleKnightPaths(chessPos* startingPosition);
 *				based on these two tables as more nodes. the children of each node are saved into
 *				a list in the node itself.
 * Arguments:	root		- pointer to a treeNode currently acting as the root
-*				takenTable	- 2D array of ints representing position that were already stepped on
+*				takenTable	- 2D array of ints representing positions that were already stepped on
 *				movesTable	- 3D array of chessPos representing allowed moves from each position
 * Return:		none (it calls itself recursively until the tree is filled up)
 */
 void knightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable);
 
 
-
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Question 4 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+chessPosList* findKnightPathCoveringAllBoard(pathTree* path_tree);
+
+
+
+bool pathCoveringBoardHelper(treeNode* root, chessPosList* lst, int* len);
+
+
 
 #endif

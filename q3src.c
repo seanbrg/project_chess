@@ -1,7 +1,5 @@
 #include "utilities.h"
 
-int counter = 0;
-
 // make a tree for all possible knight paths across the board from startingPosition
 pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 {
@@ -11,7 +9,7 @@ pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 	chessPosArray*** movesTable = validKnightMoves(); 
 										
 	tree.root = createTreeNode(*startingPosition);
-	knightPathsHelper(tree.root, takenTable, movesTable, counter);
+	knightPathsHelper(tree.root, takenTable, movesTable);
 
 	freeBoard(takenTable);
 	freePosArray(movesTable);
@@ -40,8 +38,9 @@ void knightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesT
 		{
 			treeNode* nextNode = createTreeNode(nextPositions[i]);
 			insertRootDataToEnd(&(root->next_possible_positions), nextNode);
-			knightPathsHelper(root->next_possible_positions.tail->node, takenTable, movesTable, counter);
+			knightPathsHelper(root->next_possible_positions.tail->node, takenTable, movesTable);
 		}
 	}
+
 	takenTable[curRow][curCol] = 0; // mark current position as untaken (for other paths)
 }

@@ -35,8 +35,10 @@ chessPosCell* createNewPosCell(chessPos data, chessPosCell* next);
 
 bool isEmptyPosList(chessPosList* lst);
 
-void insertPosCellToStart(chessPosList* lst, chessPosCell* node);
+void insertPosCellToEnd(chessPosList* lst, chessPosCell* node);
 
-void insertPosDataToStart(chessPosList* lst, chessPos data);
+void insertPosDataToEnd(chessPosList* lst, chessPos data);
+
+void removeLastPosCell(chessPosList* lst);
 
 #endif

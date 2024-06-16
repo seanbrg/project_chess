@@ -63,7 +63,7 @@ chessPosCell* createNewPosCell(chessPos data, chessPosCell* next)
 	return res;
 }
 
-void insertPosCellToStart(chessPosList* lst, chessPosCell* node)
+void insertPosCellToEnd(chessPosList* lst, chessPosCell* node)
 {
 	if (isEmptyPosList(lst) == true)
 	{
@@ -72,14 +72,28 @@ void insertPosCellToStart(chessPosList* lst, chessPosCell* node)
 	}
 	else
 	{
-		node->next = lst->head;
-		lst->head = node;
+		lst->tail->next = node;
+		node->next = NULL;
+		lst->tail = node;
 	}
 }
 
-void insertPosDataToStart(chessPosList* lst, chessPos data)
+void insertPosDataToEnd(chessPosList* lst, chessPos data)
 {
-	chessPosCell* newHead;
-	newHead = createNewPosCell(data, NULL);
-	insertPosCellToStart(lst, newHead);
+	chessPosCell* newTail;
+	newTail = createNewPosCell(data, NULL);
+	insertPosCellToEnd(lst, newTail);
+}
+
+void removeLastPosCell(chessPosList* lst)
+{
+	chessPosCell* node = lst->head, * prev = NULL;
+
+	if (node != lst->tail)
+	{
+		prev = lst->head;
+		while (prev->next != lst->tail)
+			prev = prev->next;
+	}
+	removePosCell(lst, node, prev);
 }
