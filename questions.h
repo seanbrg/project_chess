@@ -74,6 +74,14 @@ void printBoard(chessPosList* lst);
 int** initBoard();
 
 
+/*				freeBoard()
+* Description:	free the 2D board of ints
+* Arguments:	board - 2D board of ints to free
+* Return:		none
+*/
+void freeBoard(int** board);
+
+
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Question 3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 

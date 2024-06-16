@@ -13,6 +13,7 @@ pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 	tree.root = createTreeNode(*startingPosition);
 	knightPathsHelper(tree.root, takenTable, movesTable, counter);
 
+	freeBoard(takenTable);
 	freePosArray(movesTable);
 	return tree;
 }

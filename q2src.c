@@ -59,10 +59,7 @@ void printBoard(chessPosList* lst)
 		}
 		putchar('\n');
 	}
-
-	for (i = 0; i < ROWS; ++i)
-		free(board[i]);
-	free(board);
+	freeBoard(board);
 }
 
 
@@ -80,4 +77,13 @@ int** initBoard()
 		CHECK_MALLOC(board[i]);
     }
     return board;
+}
+
+// free the board of ints
+void freeBoard(int** board)
+{
+	for (int i = 0; i < ROWS; ++i)
+		free(board[i]);
+
+	free(board);
 }
