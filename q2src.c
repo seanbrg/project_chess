@@ -9,23 +9,19 @@ void display(chessPosList* lst)
 
 	while (node != NULL) // iterate over all the nodes in lst
 	{
-		printf("%c %c", node->position[0], node->position[1]);
 		check = lst->head;
 		while (check != node) // find out if this node's position is
 		{					 // identical to a previous node - "check"
 			if (comparePos(check->position, node->position))
 			{
-				printf("removed!");
 				removePosCell(lst, node, prev);
 				node = prev;
 				break;
 			}
-			prev = check;
 			check = check->next;
 		}
 		prev = node;
 		node = node->next;
-		putchar('\n');
 	}
 	printBoard(lst);
 }
