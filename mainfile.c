@@ -3,65 +3,30 @@
 
 void main()
 {
-	/*
-	// test for q1	
-	chessPosArray*** movesTable = validKnightMoves();
+	chessPos* position;
+	pathTree tree;
+	chessPosList* list;
 
-	printf("ALLOWED PATHS: \n");
-	for (int i = 0; i < ROWS; ++i)
-	{
-		for (int j = 0; j < COLS; ++j)
-		{
-			printf("FOR (%c %c):\n", i + 'A', j + '1');
-			for (int k = 0; k < movesTable[i][j]->size; ++k)
-			{
-				printf("(%c %c), ", movesTable[i][j]->positions[k][0], movesTable[i][j]->positions[k][1]);
-			}
-			putchar('\n');
-		}
-	}*/
+	char* input;
+	input = (char*)malloc(LINE * sizeof(char));
+	CHECK_MALLOC(input);
 
-	/*
-	// test for q2
-	chessPosList lst;
-	makeEmptyPosList(&lst);
-	for (int k = 0; k < movesTable[4][4]->size; ++k)
+	printf("Insert position: ");
+	fgets(input, LINE, stdin);
+	position = checkInput(input);
+	if (position == NULL)
 	{
-		insertPosDataToStart(&lst, movesTable[4][4]->positions[k]);
+		printf("ERROR: invalid input");
+		exit(EXIT_FAILURE);
 	}
-	for (int k = 0; k < movesTable[0][0]->size; ++k)
-	{
-		insertPosDataToStart(&lst, movesTable[0][0]->positions[k]);
-	}
-	display(&lst);
 	
-	// test for q3
-	printf("\n\n\n CALCULATION: \n");
-	int counter = 0;
-	chessPos pos = { 'A', '1' };
+	tree = findAllPossibleKnightPaths(position);
+	list = findKnightPathCoveringAllBoard(&tree);
+	if (list == NULL)
+		printf("No path found");
+	else
+		display(list);
 
-	findAllPossibleKnightPaths(&pos, &counter);
-	printf("COUNTER: %d", counter);
-	*/
-
-	//test for q4
-	
-	chessPos pos = { 'A', '1' };
-
-	pathTree tree = findAllPossibleKnightPaths(&pos);
-
-	chessPosList* lst = findKnightPathCoveringAllBoard(&tree);
-	if (lst == NULL) exit(0);
-	chessPosCell* node = lst->head;
-
-	int counter = 0;
-	while (node != NULL)
-	{
-		printf("(%c %c) ", node->position[0], node->position[1]);
-		node = node->next;
-		counter++;
-	}
-	printf("\n%d\n\n", counter);
-
-	display(lst);
+	free(position);
+	free(input);
 }

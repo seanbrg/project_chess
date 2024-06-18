@@ -1,13 +1,15 @@
 #ifndef __UTILITIES_H
 #define __UTILITIES_H
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-
-#define ROWS 8
-#define COLS 8
+#define LINE 3
+#define ROWS 5
+#define COLS 5
 #define KNIGHT_MOVES 8
 
 #define CHECK_MALLOC(pointer) if (pointer == NULL) { \
@@ -60,7 +62,7 @@ typedef struct _treeNodeListCell {
 	struct _treeNodeListCell* next;
 } treeNodeListCell;
 
-#include "misc.h"
+#include "helper.h"
 #include "questions.h"
 
 /*

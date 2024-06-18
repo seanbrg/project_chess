@@ -37,10 +37,12 @@ void knightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesT
 		if (takenTable[nextRow][nextCol] == 0)
 		{
 			treeNode* nextNode = createTreeNode(nextPositions[i]);
+
+			//printf("(%c %c) -> (%c %c)\n", root->position[0], root->position[1], nextPositions[i][0], nextPositions[i][1]);
+			
 			insertRootDataToEnd(&(root->next_possible_positions), nextNode);
 			knightPathsHelper(root->next_possible_positions.tail->node, takenTable, movesTable);
 		}
 	}
-
 	takenTable[curRow][curCol] = 0; // mark current position as untaken (for other paths)
 }

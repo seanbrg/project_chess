@@ -1,5 +1,27 @@
 #include "utilities.h"
 
+chessPos* checkInput(char* string)
+{
+	char firstRow = 'A';
+	char lastRow = firstRow + ROWS - 1;
+	char firstCol = '1';
+	char lastCol = firstCol + COLS - 1;
+
+	if (string[0] <= lastRow && string[0] >= firstRow)
+		if (string[1] <= lastCol && string[1] >= firstCol)
+		{
+			chessPos* res;
+			res = (chessPos*)malloc(sizeof(chessPos));
+			CHECK_MALLOC(res);
+
+			(*res)[0] = string[0];
+			(*res)[1] = string[1];
+			return res;
+		}
+
+	return NULL;
+}
+
 int posRow(chessPos pos)
 {
 	return pos[0] - 'A';
@@ -83,17 +105,4 @@ void insertPosDataToEnd(chessPosList* lst, chessPos data)
 	chessPosCell* newTail;
 	newTail = createNewPosCell(data, NULL);
 	insertPosCellToEnd(lst, newTail);
-}
-
-void removeLastPosCell(chessPosList* lst)
-{
-	chessPosCell* node = lst->head, * prev = NULL;
-
-	if (node != lst->tail)
-	{
-		prev = lst->head;
-		while (prev->next != lst->tail)
-			prev = prev->next;
-	}
-	removePosCell(lst, node, prev);
 }

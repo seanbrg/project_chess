@@ -1,7 +1,9 @@
-#ifndef __MISC_H
-#define __MISC_H
+#ifndef __HELPER_H
+#define __HELPER_H
 
 #include "utilities.h"
+
+chessPos* checkInput(char* string);
 
 int posRow(chessPos pos);
 
@@ -38,7 +40,5 @@ bool isEmptyPosList(chessPosList* lst);
 void insertPosCellToEnd(chessPosList* lst, chessPosCell* node);
 
 void insertPosDataToEnd(chessPosList* lst, chessPos data);
-
-void removeLastPosCell(chessPosList* lst);
 
 #endif

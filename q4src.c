@@ -14,8 +14,10 @@ chessPosList* findKnightPathCoveringAllBoard(pathTree* path_tree)
 
 bool pathCoveringBoardHelper(treeNode* root, chessPosList* lst, int* len)
 {
+	chessPosCell* prev = lst->tail;
 	insertPosDataToEnd(lst, root->position);
 	++(*len);
+	chessPosCell* tail = lst->tail;
 
 	if (*len == ROWS * COLS) return true;
 	else
@@ -28,7 +30,7 @@ bool pathCoveringBoardHelper(treeNode* root, chessPosList* lst, int* len)
 		}
 	}
 
-	removeLastPosCell(lst);
+	removePosCell(lst, tail, prev);
 	--(*len);
 	return false;
 }
