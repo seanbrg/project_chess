@@ -6,8 +6,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
-#define LINE 3
+#define LINE 256
 #define ROWS 5
 #define COLS 5
 #define KNIGHT_MOVES 8

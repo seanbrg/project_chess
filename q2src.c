@@ -54,7 +54,7 @@ void printBoard(chessPosList* lst)
 		printf("%c|", 'A' + i);  // left column
 		for (j = 0; j < COLS; ++j)
 		{   // number in a cell
-			if (board[i][j] != 0) printf("%.2d|", board[i][j]);
+			if (board[i][j] != 0) printf("%2d|", board[i][j]);
 			else printf("  |");
 		}
 		putchar('\n');
@@ -69,7 +69,7 @@ int** initBoard()
     int i = 0;
     int j = 0;
 
-	int** board = (int***)malloc(ROWS * sizeof(int*));
+	int** board = (int**)malloc(ROWS * sizeof(int*));
     CHECK_MALLOC(board);
     for (int i = 0; i < ROWS; ++i)
     {

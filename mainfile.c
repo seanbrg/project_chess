@@ -16,7 +16,8 @@ void main()
 	position = checkInput(input);
 	if (position == NULL)
 	{
-		printf("ERROR: invalid input");
+		printf("Invalid input");
+		free(input);
 		exit(EXIT_FAILURE);
 	}
 	
@@ -27,6 +28,7 @@ void main()
 	else
 		display(list);
 
+	// free all
 	free(position);
 	free(input);
 }

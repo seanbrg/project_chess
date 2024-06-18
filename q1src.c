@@ -54,7 +54,7 @@ bool isValidPosition(int row, int column) {
 // calculate all valid knight moves from a given position and save in posArray
 void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex) {
     //all possible moves for a knight from any given position
-    int moves[8][2] = { {1, -2}, {2, -1}, {2, 1}, {1, 2}, {-1, 2}, {-2, 1}, {-2, -1}, {-1, -2} };
+    int moves[8][2] = { {-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1} };
 
     posArray->positions = (chessPos*)malloc(KNIGHT_MOVES * sizeof(chessPos));
     CHECK_MALLOC(posArray->positions);

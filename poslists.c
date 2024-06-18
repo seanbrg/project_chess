@@ -7,17 +7,18 @@ chessPos* checkInput(char* string)
 	char firstCol = '1';
 	char lastCol = firstCol + COLS - 1;
 
-	if (string[0] <= lastRow && string[0] >= firstRow)
-		if (string[1] <= lastCol && string[1] >= firstCol)
-		{
-			chessPos* res;
-			res = (chessPos*)malloc(sizeof(chessPos));
-			CHECK_MALLOC(res);
+	if (strlen(string) == 3)
+		if (string[0] <= lastRow && string[0] >= firstRow)
+			if (string[1] <= lastCol && string[1] >= firstCol)
+			{
+				chessPos* res;
+				res = (chessPos*)malloc(sizeof(chessPos));
+				CHECK_MALLOC(res);
 
-			(*res)[0] = string[0];
-			(*res)[1] = string[1];
-			return res;
-		}
+				(*res)[0] = string[0];
+				(*res)[1] = string[1];
+				return res;
+			}
 
 	return NULL;
 }
@@ -63,7 +64,7 @@ void removePosCellHead(chessPosList* lst)
 {
 	if (!isEmptyPosList(lst))
 	{
-		chessPosList* curr = lst->head;
+		chessPosCell* curr = lst->head;
 
 		if (lst->head == lst->tail)
 			lst->head = lst->tail = NULL;
