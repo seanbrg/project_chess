@@ -19,7 +19,7 @@ pathTree findAllPossibleKnightPaths(chessPos* startingPosition)
 
 
 // helper for making this tree recursively
-void knightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable)
+void knightPathsHelper(treeNode* root, int** takenTable, const chessPosArray*** movesTable)
 {
 	int i;
 	int curRow = posRow(root->position);

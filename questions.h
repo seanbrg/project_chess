@@ -53,6 +53,9 @@ void printBoard(chessPosList* lst);
 /*				findAllPossibleKnightPaths()
 * Description:	make a tree for all possible knight paths across the board starting from a single
 *				position, such that a path will not step on the same position in the board twice
+*				this is achieved by generating a table of all possible moves from each position
+*				as well as an empty table for remembering if a position was already stepped on
+*				both of these tables are given to a helper function which builds this recursively
 * Arguments:	startingPosition - pointer to a chessPos from which the paths will be calculated
 * Return:		a path tree of all possible paths
 */
@@ -64,13 +67,13 @@ pathTree findAllPossibleKnightPaths(chessPos* startingPosition);
 *				which positions in the board were already stepped on (marked on takenTable with 1s)
 *				and generating for each treeNode, representing a position, all of its allowed moves
 *				based on these two tables as more nodes. the children of each node are saved into
-*				a list in the node itself.
+*				a list in the node itself
 * Arguments:	root		- pointer to a treeNode currently acting as the root
 *				takenTable	- 2D array of ints representing positions that were already stepped on
 *				movesTable	- 3D array of chessPos representing allowed moves from each position
 * Return:		none (it calls itself recursively until the tree is filled up)
 */
-void knightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesTable);
+void knightPathsHelper(treeNode* root, int** takenTable, const chessPosArray*** movesTable);
 
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Question 4 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
