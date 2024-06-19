@@ -43,7 +43,7 @@ void printBoard(chessPosList* lst)
 		posNode = posNode->next;
 	}
 	
-	putchar(' ');				// print this whole shebang
+	putchar(' ');				// print
 	for (i = 1; i <= COLS; ++i)
 	{
 		printf("%3d", i);		// top row
