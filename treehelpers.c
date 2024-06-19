@@ -1,15 +1,5 @@
-#include "utilities.h"
+#include "common.h"
 
-void makeEmptyRootList(treeNodeList* rootList)
-{
-	rootList->head = rootList->tail = NULL;
-}
-
-
-bool isEmptyRootList(treeNodeList* lst)
-{
-	return (lst->head == NULL) ? true : false;
-}
 
 // create a new tree node
 treeNode* createTreeNode(chessPos position) {
@@ -25,6 +15,8 @@ treeNode* createTreeNode(chessPos position) {
 	return newNode;
 }
 
+
+// create new cell for a list of treeNodesS
 treeNodeListCell* createNewRootCell(treeNode* data, treeNodeListCell* next)
 {
 	treeNodeListCell* res;
@@ -35,6 +27,22 @@ treeNodeListCell* createNewRootCell(treeNode* data, treeNodeListCell* next)
 	return res;
 }
 
+
+// make empty roots list
+void makeEmptyRootList(treeNodeList* rootList)
+{
+	rootList->head = rootList->tail = NULL;
+}
+
+
+// check if a roots list is empty
+bool isEmptyRootList(treeNodeList* lst)
+{
+	return (lst->head == NULL) ? true : false;
+}
+
+
+// insert cell to the end of a roots list
 void insertRootCellToEnd(treeNodeList* lst, treeNodeListCell* node)
 {
 	if (isEmptyRootList(lst) == true)
@@ -50,6 +58,8 @@ void insertRootCellToEnd(treeNodeList* lst, treeNodeListCell* node)
 	}
 }
 
+
+// insert data (pointer to a treeNode) as a new cell to the end of a roots list
 void insertRootDataToEnd(treeNodeList* lst, treeNode* data)
 {
 	treeNodeListCell* newTail;

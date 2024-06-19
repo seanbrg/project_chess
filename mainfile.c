@@ -1,16 +1,17 @@
-#include "utilities.h"
+#include "common.h"
 
 
 void main()
 {
 	chessPos* position;
-	pathTree tree;
-	chessPosList* list;
+	pathTree allPathsTree;
+	chessPosList* pathList;
 
 	char* input;
 	input = (char*)malloc(LINE * sizeof(char));
 	CHECK_MALLOC(input);
 
+	// get input and check it
 	printf("Insert position: ");
 	fgets(input, LINE, stdin);
 	position = checkInput(input);
@@ -21,14 +22,16 @@ void main()
 		exit(EXIT_FAILURE);
 	}
 	
-	tree = findAllPossibleKnightPaths(position);
-	list = findKnightPathCoveringAllBoard(&tree);
-	if (list == NULL)
+	// calculate paths
+	allPathsTree = findAllPossibleKnightPaths(position);
+	pathList = findKnightPathCoveringAllBoard(&allPathsTree);
+	if (pathList == NULL)
 		printf("No path found");
 	else
-		display(list);
+		display(pathList);
 
-	// free all
+	freeTree(&allPathsTree);
+	freePosList(pathList);
 	free(position);
 	free(input);
 }

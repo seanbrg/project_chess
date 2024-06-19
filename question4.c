@@ -1,5 +1,7 @@
-#include "utilities.h"
+#include "common.h"
 
+
+// find in a path tree a path that covers the whole board
 chessPosList* findKnightPathCoveringAllBoard(pathTree* path_tree)
 {
 	int len = 0;
@@ -12,14 +14,17 @@ chessPosList* findKnightPathCoveringAllBoard(pathTree* path_tree)
 	else return NULL;
 }
 
+
+// helper for finding the path recursively
 bool pathCoveringBoardHelper(treeNode* root, chessPosList* lst, int* len)
 {
-	chessPosCell* prev = lst->tail;
+	chessPosCell* prev = lst->tail; // add current position to end of lst (and save it)
 	insertPosDataToEnd(lst, root->position);
 	++(*len);
 	chessPosCell* tail = lst->tail;
 
-	if (*len == ROWS * COLS) return true;
+	if (*len == ROWS * COLS)		// check if length of path is the whole board
+		return true;
 	else
 	{
 		treeNodeListCell* nextMove = root->next_possible_positions.head;
@@ -30,7 +35,7 @@ bool pathCoveringBoardHelper(treeNode* root, chessPosList* lst, int* len)
 		}
 	}
 
-	removePosCell(lst, tail, prev);
+	removePosCell(lst, tail, prev); // backtrack - remove current position from lst
 	--(*len);
 	return false;
 }

@@ -1,4 +1,4 @@
-#include "utilities.h"
+#include "common.h"
 
 
 // remove duplicates from a chessPos list and print as a board
@@ -34,7 +34,7 @@ void printBoard(chessPosList* lst)
     int i = 1, j, x, y;
 	chessPosCell* posNode = lst->head;
 
-	while (posNode != NULL) // fill up the 2D board array
+	while (posNode != NULL)		// fill up the 2D board array
 	{
 		y = posRow(posNode->position);
 		x = posCol(posNode->position);
@@ -43,47 +43,21 @@ void printBoard(chessPosList* lst)
 		posNode = posNode->next;
 	}
 	
-	putchar(' ');			// print this whole shebang
+	putchar(' ');				// print this whole shebang
 	for (i = 1; i <= COLS; ++i)
 	{
-		printf("%3d", i);        // top row
+		printf("%3d", i);		// top row
 	}
 	putchar('\n');
 	for (i = 0; i < ROWS; ++i)
 	{
-		printf("%c|", 'A' + i);  // left column
+		printf("%c|", 'A' + i); // left column
 		for (j = 0; j < COLS; ++j)
-		{   // number in a cell
+		{						// number in a cell
 			if (board[i][j] != 0) printf("%2d|", board[i][j]);
 			else printf("  |");
 		}
 		putchar('\n');
 	}
 	freeBoard(board);
-}
-
-
-// initialize an empty board of ints
-int** initBoard() 
-{
-    int i = 0;
-    int j = 0;
-
-	int** board = (int**)malloc(ROWS * sizeof(int*));
-    CHECK_MALLOC(board);
-    for (int i = 0; i < ROWS; ++i)
-    {
-        board[i] = (int*)calloc(COLS, sizeof(int));
-		CHECK_MALLOC(board[i]);
-    }
-    return board;
-}
-
-// free the board of ints
-void freeBoard(int** board)
-{
-	for (int i = 0; i < ROWS; ++i)
-		free(board[i]);
-
-	free(board);
 }

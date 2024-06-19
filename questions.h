@@ -1,7 +1,7 @@
 #ifndef __QUESTIONS_H
 #define __QUESTIONS_H
 
-#include "utilities.h"
+#include "common.h"
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Question 1 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -12,26 +12,6 @@
 * Return:		array containing the valid knight moves from each position on the chessboard
 */
 chessPosArray*** validKnightMoves();
-
-
-/*				initPosArray()
-* Description:	initializes a 3D array representing the board, with each position in the board
-*				being itself an array of chessPos, used to store the allowed moves from each
-*				position in the board
-* Arguments:	none
-* Return:		initialized 3D array of chessPos
-*/
-chessPosArray*** initPosArray();
-
-
-/*				isValidPosition()
-* Description:	checks if a given position on a chessboard is valid
-*				(if it falls within the bounds of the chessboard)
-* Arguments:	row		- row index of the position to check
-*				column	- column index of the position to check
-* Return:		true/false
-*/
-bool isValidPosition(int row, int column);
 
 
 /*				calculateValidMoves()
@@ -66,22 +46,6 @@ void display(chessPosList* lst);
 void printBoard(chessPosList* lst);
 
 
-/*				initBoard()
-* Description:	initialize a 2D array of ints full of 0s to act as an empty board
-* Arguments:	none
-* Return:		initialized 2D array 
-*/
-int** initBoard();
-
-
-/*				freeBoard()
-* Description:	free the 2D board of ints
-* Arguments:	board - 2D board of ints to free
-* Return:		none
-*/
-void freeBoard(int** board);
-
-
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Question 3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
@@ -112,10 +76,34 @@ void knightPathsHelper(treeNode* root, int** takenTable, chessPosArray*** movesT
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Question 4 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
+/*				findKnightPathCoveringAllBoard()
+* Description:	given a paths tree, find in it a path that covers the whole board and return
+*				it as a list of positions in order of the path. this is done by creating the list
+*				as well as a variable for remembering the list's current length, then calling the
+*				helper function to recursively backtrack over the tree to find a path in the right
+*				length, while building the list as it does so
+*				if the helper function returned 'false' then such a path does not exist
+* Arguments:	path_tree	- pointer to a tree of paths
+* Return:		pointer to a newly created chessPosList, NULL if the path doesn't exist
+*/
 chessPosList* findKnightPathCoveringAllBoard(pathTree* path_tree);
 
 
-
+/*				pathCoveringBoardHelper()
+* Description:	a recursive function that explores a tree representing paths and records the current
+*				path it has taken in it as a linked list - 'lst' - and also records the length of
+*				lst by adding/subtracting 1 to 'len' every time a new cell is added/removed.
+*				when 'len' == ROWS * COLS, meaning the path covers the whole board, the recursion
+*				ends, otherwise it will continue into the children of the current root.
+*				if after exploring all children the function still didn't return, then it means the
+*				current path is not the right one, thus the function backtracks - it removes the
+*				cell it added in that same iteration from 'lst', thus allowing 'lst' to only record the
+*				correct path
+* Arguments:	root	- pointer to a treeNode currently handled as the root
+*				lst		- pointer to an external chessPosList for saving the path
+*				len		- pointer to an external variable remembering the length of 'lst'
+* Return:		true if the right path was found, false otherwise
+*/
 bool pathCoveringBoardHelper(treeNode* root, chessPosList* lst, int* len);
 
 

@@ -1,5 +1,5 @@
-#ifndef __UTILITIES_H
-#define __UTILITIES_H
+#ifndef __COMMON_H
+#define __COMMON_H
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -9,6 +9,7 @@
 #include <string.h>
 
 #define LINE 256
+#define POSLEN 2
 #define ROWS 5
 #define COLS 5
 #define KNIGHT_MOVES 8
@@ -63,8 +64,9 @@ typedef struct _treeNodeListCell {
 	struct _treeNodeListCell* next;
 } treeNodeListCell;
 
-#include "helper.h"
+#include "helpers.h"
 #include "questions.h"
+
 
 /*
                                                                                    .--.
