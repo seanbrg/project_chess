@@ -19,7 +19,7 @@ chessPosArray*** validKnightMoves() {
 // calculate all valid knight moves from a given position and save in posArray
 void calculateValidMoves(chessPosArray* posArray, int rowIndex, int columnIndex) {
     // all physically possible moves for a knight relative to its starting position
-    static const int moves[KNIGHT_MOVES][POSLEN] = 
+    static const int moves[KNIGHT_MOVES][POS_LEN] = 
                 { {-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1} };
 
     posArray->positions = (chessPos*)malloc(KNIGHT_MOVES * sizeof(chessPos));

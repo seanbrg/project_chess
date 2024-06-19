@@ -9,7 +9,7 @@
 #include <string.h>
 
 #define LINE 256
-#define POSLEN 2
+#define POS_LEN 2
 #define ROWS 5
 #define COLS 5
 #define KNIGHT_MOVES 8

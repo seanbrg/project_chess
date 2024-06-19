@@ -10,7 +10,7 @@ chessPos* checkInput(char* string)
 	char firstCol = '1';
 	char lastCol = firstCol + COLS - 1;
 
-	if (strlen(string) == POSLEN + 1) // valid input length
+	if (strlen(string) == POS_LEN + 1) // valid input length
 		if (string[0] <= lastRow && string[0] >= firstRow) // valid position on the board
 			if (string[1] <= lastCol && string[1] >= firstCol)
 			{
